@@ -61,7 +61,7 @@ const Navbar = () => {
                     </ul>
                 ) : (
                     <div className='flex items-center gap-2'>
-                        {user && <Image
+                        {user.photoURL && <Image
                             src={user?.photoURL}
                             alt={user?.displayName}
                             className="h-8 w-8 rounded-full"
@@ -69,7 +69,7 @@ const Navbar = () => {
                             height={50}
                         />}
                         <div>
-                            <p>Welcome, {user.displayName?.split(' ')[0]}</p>
+                            <p>Welcome, {user.displayName?.split(' ')[0] || user?.email}</p>
                             <p className="cursor-pointer" onClick={handleSignOut}>
                                 Sign out
                             </p>

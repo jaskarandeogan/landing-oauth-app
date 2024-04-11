@@ -21,7 +21,7 @@ const Profile = () => {
                 <Spinner />
             ) : user ? (
                 <p>
-                    Welcome, {user.displayName} - you are logged in to the profile page -
+                    Welcome, {user?.displayName || user?.email} - you are logged in to the profile page -
                     a protected route.
                 </p>
             ) : (

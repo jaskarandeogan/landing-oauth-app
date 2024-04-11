@@ -7,6 +7,9 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   FacebookAuthProvider,
+  sendSignInLinkToEmail,
+  signInWithEmailLink,
+  isSignInWithEmailLink
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -25,6 +28,20 @@ export const AuthContextProvider = ({ children }) => {
     signInWithPopup(auth, provider);
   };
 
+  const sendEmail = (email) => {
+    sendSignInLinkToEmail(auth, email, {
+      url: process.env.NEXT_PUBLIC_URL + "/login",
+      handleCodeInApp: true,
+    })
+      .then(() => {
+        console.log("Verification email sent");
+        window.localStorage.setItem('emailForSignIn', email);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   const logOut = () => {
     signOut(auth);
   };
@@ -36,8 +53,21 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsubscribe();
   }, [user]);
 
+  useEffect(() => {
+    const email = window.localStorage.getItem('emailForSignIn');
+    if (isSignInWithEmailLink(auth, window.location.href) && email) {
+      signInWithEmailLink(auth, email, window.location.href)
+        .then((result) => {
+          window.localStorage.removeItem('emailForSignIn');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, facebookSignIn, logOut }}>
+    <AuthContext.Provider value={{ user, googleSignIn, facebookSignIn, sendEmail, logOut }}>
       {children}
     </AuthContext.Provider>
   );
