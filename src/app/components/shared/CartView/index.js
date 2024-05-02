@@ -18,7 +18,10 @@ const CartView = ({ addCart }) => {
                 {
                     cart.map((item, index) => {
                         return (
-                            <CartItem key={index} product={item.product} />
+                            <CartItem key={index}
+                                product={item.product}
+                                handleDelete={handleDelete}
+                            />
                         );
                     })
                 }

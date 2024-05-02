@@ -1,4 +1,6 @@
 import React from "react";
+import { HiPlus } from "react-icons/hi";
+import { HiMinus } from "react-icons/hi";
 
 function Counter({ size, setQuantity, quantity}) {
 
@@ -21,14 +23,14 @@ function Counter({ size, setQuantity, quantity}) {
         onClick={handleDecrement}
         className="p-4 text-[orange] text-2xl font-semibold hover:text-[darkorange]"
       >
-        -
+        <HiMinus />
       </button>
       <span>{quantity}</span>
       <button
         onClick={handleIncrement}
         className="p-4 text-[orange] text-2xl font-semibold hover:text-[darkorange]"
       >
-        +
+        <HiPlus />
       </button>
     </div>
   );

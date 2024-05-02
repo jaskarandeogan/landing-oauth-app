@@ -58,11 +58,11 @@ const Login = () => {
       };
 
     return (
-        <div className='flex w-full '>
+        <div className='flex items-center w-full min-h-[calc(100vh-80px)] orange-gradient'>
             {loading && <Spinner />}
             {!loading &&
                 <section className='flex justify-between w-full py-12 lg:py-24 mx-auto max-w-7xl px-8 gap-12 lg:gap-24'>
-                    <div className="image-section w-full lg:max-w-[550px] hidden md:block flex-1">
+                    <div className="image-section w-full lg:max-w-[550px] hidden lg:block flex-1">
                         <div className="main-image rounded">
                             <Image src={image} alt="main" className="rounded w-full shadow-xl" width={400} height={400} />
                         </div>
@@ -82,7 +82,7 @@ const Login = () => {
                             })}
                         </div>
                     </div>
-                    <div className='flex-1 flex items-center'>
+                    <div className='flex-1 flex items-center glass-bg'>
                         <Form
                             handleSignIn={handleSignIn}
                             handleFacebookSignIn={handleFacebookSignIn}

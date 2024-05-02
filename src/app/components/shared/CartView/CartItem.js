@@ -3,7 +3,9 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { formatCurrency } from '../../../commonjs/common'
 import Image from 'next/image'
 
-const CartItem = ({product}) => {
+const CartItem = ({ product,
+    handleDelete
+}) => {
     return (
         <div className="flex justify-between items-center p-6 gap-3">
             <div className="">

@@ -1,32 +1,41 @@
 import React from 'react'
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 
 const Form = ({
     handleSignIn,
-    handleFacebookSignIn ,
+    handleFacebookSignIn,
     handleEmailLogin,
     isEmailSent,
     setEmail
 }) => {
 
     return (
-        <div className='w-[500px] m-auto p-8 shadow-2xl rounded-lg'>
-            <h1 className='text-4xl text-gray-600 font-semibold'>Login</h1>
-            <div className='mt-4 flex flex-col gap-2'>
-                <input type="email" placeholder='Email' className='p-3 border border-gray-300 rounded-md my-4' onChange={e => setEmail(prev => {
+        <div className='w-full min-h-[500px] flex flex-col justify-center md:w-[500px] m-auto'>
+            <h1 className='text-4xl text-center text-gray font-semibold'>Sign In With</h1>
+            <div className='flex items-start justify-between gap-2 mt-4 px-8'>
+                <button className='font-medium h-[56px] w-full rounded-md flex-1 flex items-center shadow-md justify-center hover:shadow-lg transition-all bg-white' onClick={handleFacebookSignIn}>
+                    <FaFacebook className='mr-2 h-[24px] w-[24px]' />
+                    Facebook
+                </button>
+                <button className='font-medium h-[56px] w-full rounded-md flex-1 flex items-center shadow-md justify-center hover:shadow-lg transition-all bg-white' onClick={handleSignIn}>
+                    <FcGoogle className='mr-2 h-[24px] w-[24px]' />
+                    Google
+                </button>
+            </div>
+            <h1 className='text-4xl text-center text-gray font-semibold mt-8'>Or</h1>
+            <div className='mt-4 flex flex-col gap-2 px-8'>
+                <input type="email" placeholder='Email' className='p-3 border-2 border-slate-200 rounded-md my-4' onChange={e => setEmail(prev => {
                     if (e.target.value !== prev) {
                         return e.target.value;
                     }
                     return prev;
                 })} />
                 {isEmailSent && <p className='text-green-500'>Verification email sent</p>}
-                <button className='bg-green-800 text-white font-medium hover:brightness-125 p-4 w-full rounded-md' onClick={handleEmailLogin}>Login With Email</button>
-                <button className='bg-red-500 text-white font-medium hover:brightness-125 p-4 w-full rounded-md' onClick={handleSignIn}>
-                    Login With Google
-                </button>
-                <button className='bg-blue-950 text-white font-medium hover:brightness-125 p-4 w-full rounded-md' onClick={handleFacebookSignIn}>Login With Facebook</button>
+                <button className='bg-[orange] text-[#FFFFFF] font-medium p-4 w-full rounded-md hover:bg-[#ff8c00] transition-all' onClick={handleEmailLogin}>Login With Email</button>
             </div>
         </div>
     )
 }
 
-export default Form
+export default Form;
