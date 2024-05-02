@@ -35,7 +35,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="h-20 w-full p-2 flex items-center shadow-md">
+        <div className="h-20 w-full md:p-2 flex items-center shadow-md">
             <div className='max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between'>
                 <ul className="items-center flex">
                     <Image src="/sneakers.svg" alt="logo" width={100} height={30} className='h-auto w-auto cursor-pointer' onClick={

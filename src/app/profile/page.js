@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { UserAuth } from "../context/AuthContext";
 import Spinner from "../components/Spinner";
+import { PuffLoader } from 'react-spinners';
 
 const Profile = () => {
     const { user } = UserAuth();
@@ -16,9 +17,11 @@ const Profile = () => {
     }, [user]);
 
     return (
-        <div className="p-4">
+        <div className="p-4 orange-gradient-100 min-h-[calc(100vh-80px)] relative">
             {loading ? (
-                <Spinner />
+                <div className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]'>
+                    <PuffLoader color="#FFFF" />
+                </div>
             ) : user ? (
                 <p>
                     Welcome, {user?.displayName || user?.email} - you are logged in to the profile page -

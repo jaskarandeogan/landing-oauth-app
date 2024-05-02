@@ -1,10 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { UserAuth } from "../context/AuthContext";
-import Spinner from "../components/Spinner";
 import Form from '../components/Form';
 import Image from 'next/image'
 import { data } from '../data/data';
+import { PuffLoader } from 'react-spinners';
 
 const Login = () => {
     const { user, googleSignIn, facebookSignIn, sendEmail, logOut } = UserAuth();
@@ -34,7 +34,7 @@ const Login = () => {
             await new Promise((resolve) => setTimeout(resolve, 50));
             setLoading(false);
         };
-        checkAuthentication();    
+        checkAuthentication();
     }, [user])
 
     useEffect(() => {
@@ -42,7 +42,7 @@ const Login = () => {
             window.location.href = '/profile';
         }
     }
-    , [user])
+        , [user])
 
     const handleEmailLogin = async () => {
         try {
@@ -55,13 +55,15 @@ const Login = () => {
 
     const handleImageChange = (e) => {
         setImage(e.target.src);
-      };
+    };
 
     return (
         <div className='flex items-center w-full min-h-[calc(100vh-80px)] orange-gradient-100'>
-            {loading && <Spinner />}
+            {loading && <div className='self-center w-full flex justify-center'>
+                <PuffLoader color="#FFFF" />
+            </div>}
             {!loading &&
-                <section className='flex justify-between w-full py-12 lg:py-24 mx-auto max-w-7xl px-8 gap-12 lg:gap-24'>
+                <section className='flex justify-between w-full py-12 lg:py-24 mx-auto max-w-7xl px-2 md:px-8 gap-12 lg:gap-24'>
                     <div className="image-section w-full lg:max-w-[550px] hidden lg:block flex-1">
                         <div className="main-image rounded">
                             <Image src={image} alt="main" className="rounded w-full shadow-xl" width={400} height={400} />
