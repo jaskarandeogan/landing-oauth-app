@@ -58,7 +58,7 @@ const Login = () => {
       };
 
     return (
-        <div className='flex items-center w-full min-h-[calc(100vh-80px)] orange-gradient'>
+        <div className='flex items-center w-full min-h-[calc(100vh-80px)] orange-gradient-100'>
             {loading && <Spinner />}
             {!loading &&
                 <section className='flex justify-between w-full py-12 lg:py-24 mx-auto max-w-7xl px-8 gap-12 lg:gap-24'>
@@ -82,7 +82,7 @@ const Login = () => {
                             })}
                         </div>
                     </div>
-                    <div className='flex-1 flex items-center glass-bg'>
+                    <div className='flex-1 flex items-center glass-bg rounded-lg'>
                         <Form
                             handleSignIn={handleSignIn}
                             handleFacebookSignIn={handleFacebookSignIn}
