@@ -2,12 +2,16 @@
 import React, { useState, useEffect } from 'react'
 import { UserAuth } from "../context/AuthContext";
 import Spinner from "../components/Spinner";
+import Form from '../components/Form';
+import Image from 'next/image'
+import { data } from '../data/data';
 
 const Login = () => {
     const { user, googleSignIn, facebookSignIn, sendEmail, logOut } = UserAuth();
     const [loading, setLoading] = useState(true);
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [email, setEmail] = useState('');
+    const [image, setImage] = React.useState(data.images[0].src);
 
     const handleSignIn = async () => {
         try {
@@ -30,8 +34,15 @@ const Login = () => {
             await new Promise((resolve) => setTimeout(resolve, 50));
             setLoading(false);
         };
-        checkAuthentication();
+        checkAuthentication();    
     }, [user])
+
+    useEffect(() => {
+        if (user) {
+            window.location.href = '/profile';
+        }
+    }
+    , [user])
 
     const handleEmailLogin = async () => {
         try {
@@ -42,34 +53,45 @@ const Login = () => {
         }
     }
 
+    const handleImageChange = (e) => {
+        setImage(e.target.src);
+      };
+
     return (
-        <div className='flex w-full min-h-screen'>
+        <div className='flex w-full '>
             {loading && <Spinner />}
-            {user && (
-                <div className="w-[500px] m-auto p-8 shadow-lg rounded-lg">
-                    <p>
-                        Welcome, {user?.displayName || user?.email} - you are logged in to the profile page -
-                        a protected route.
-                    </p>
-                </div>
-            )}
-            {!user && !loading && <div className='w-[500px] m-auto p-8 shadow-lg rounded-lg'>
-                <h1 className='text-4xl text-gray-600 font-semibold'>Login</h1>
-                <div className='mt-4 flex flex-col gap-2'>
-                    <input type="email" placeholder='Email' className='p-3 border border-gray-300 rounded-md my-4' onChange={e => setEmail(prev => {
-                        if (e.target.value !== prev) {
-                            return e.target.value;
-                        }
-                        return prev;
-                    })} />
-                    {isEmailSent && <p className='text-green-500'>Verification email sent</p>}
-                    <button className='bg-green-800 text-white font-medium hover:brightness-125 p-4 w-full rounded-md' onClick={handleEmailLogin}>Login With Email</button>
-                    <button className='bg-red-500 text-white font-medium hover:brightness-125 p-4 w-full rounded-md' onClick={handleSignIn}>
-                        Login With Google
-                    </button>
-                    <button className='bg-blue-950 text-white font-medium hover:brightness-125 p-4 w-full rounded-md' onClick={handleFacebookSignIn}>Login With Facebook</button>
-                </div>
-            </div>}
+            {!loading &&
+                <section className='flex justify-between w-full py-12 lg:py-24 mx-auto max-w-7xl px-8 gap-12 lg:gap-24'>
+                    <div className="image-section w-full lg:max-w-[550px] hidden md:block flex-1">
+                        <div className="main-image rounded">
+                            <Image src={image} alt="main" className="rounded w-full shadow-xl" width={400} height={400} />
+                        </div>
+                        <div className="thumbnails flex-wrap justify-between mt-[32px] flex">
+                            {data.images.map((item) => {
+                                return (
+                                    <Image
+                                        src={item.src}
+                                        alt={item.alt}
+                                        key={item.id}
+                                        onClick={(e) => handleImageChange(e)}
+                                        width={400}
+                                        height={400}
+                                        className="w-[20%] h-[20%] rounded hover:opacity-70 cursor-pointer shadow-sm"
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className='flex-1 flex items-center'>
+                        <Form
+                            handleSignIn={handleSignIn}
+                            handleFacebookSignIn={handleFacebookSignIn}
+                            handleEmailLogin={handleEmailLogin}
+                            isEmailSent={isEmailSent}
+                            setEmail={setEmail}
+                        />
+                    </div>
+                </section>}
         </div>
     )
 }
