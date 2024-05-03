@@ -11,6 +11,10 @@ const ProductCard = () => {
   const [image, setImage] = React.useState(data.images[0].src);
   const [quantity, setQuantity] = React.useState(0);
 
+  const generateId = () => {
+    return Math.random().toString(36).substr(2, 9);
+  };
+
   const handleAddCart = () => {
     if (quantity === 0) {
       alert("Please select quantity");
@@ -18,7 +22,7 @@ const ProductCard = () => {
     }
     addToCart({
       product: {
-        id: data.productId,
+        id: generateId(),
         name: data.slogan,
         price: data.price,
         image: data.images[0].src,

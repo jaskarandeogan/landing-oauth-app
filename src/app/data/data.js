@@ -2,22 +2,22 @@ export const data = {
     images: [
         {
             id: 1,
-            src: '/images/image-product-1.jpg',
+            src: 'https://firebasestorage.googleapis.com/v0/b/auth-app-2f7ae.appspot.com/o/image-product-1.jpg?alt=media&token=b03293e0-8912-422a-929b-c9fd0449870f',
             alt: 'A',
         },
         {
             id: 2,
-            src: '/images/image-product-2.jpg',
+            src: 'https://firebasestorage.googleapis.com/v0/b/auth-app-2f7ae.appspot.com/o/image-product-2.jpg?alt=media&token=a3f915a9-3bb3-491f-a335-a579a9e8dabc',
             alt: 'B',
         },
         {
             id: 3,
-            src: '/images/image-product-3.jpg',
+            src: 'https://firebasestorage.googleapis.com/v0/b/auth-app-2f7ae.appspot.com/o/image-product-3.jpg?alt=media&token=823a3a18-c452-4d70-8beb-e348ff141e82',
             alt: 'C',
         },
         {
             id: 4,
-            src: '/images/image-product-4.jpg',
+            src: 'https://firebasestorage.googleapis.com/v0/b/auth-app-2f7ae.appspot.com/o/image-product-4.jpg?alt=media&token=86a2d9c2-8339-4ff9-ab59-d74832953e12',
             alt: 'D',
         }
     ],
