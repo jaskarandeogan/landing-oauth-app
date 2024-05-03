@@ -53,8 +53,8 @@ const Login = () => {
         }
     }
 
-    const handleImageChange = (e) => {
-        setImage(e.target.src);
+    const handleImageChange = (src) => {
+        setImage(src);
     };
 
     return (
@@ -75,7 +75,7 @@ const Login = () => {
                                         src={item.src}
                                         alt={item.alt}
                                         key={item.id}
-                                        onClick={(e) => handleImageChange(e)}
+                                        onClick={(src) => handleImageChange(item.src)}
                                         width={400}
                                         height={400}
                                         className="w-[20%] h-[20%] rounded hover:opacity-70 cursor-pointer shadow-sm"
